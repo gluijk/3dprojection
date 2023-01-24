@@ -1,2 +1,2 @@
 # 3dprojection
-3D linear projection onto a plane
+Linear projection of a 3D scene onto a plane
