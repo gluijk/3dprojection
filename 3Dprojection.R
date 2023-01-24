@@ -35,7 +35,6 @@ DrawLine = function(img, x0, y0, x1, y1, inc=TRUE, val=1) {
     return(img)
 }
 
-
 DrawEllip = function(img, x0, y0, a, b, inc=TRUE, val=1, fill=FALSE, thick=1) {
     # Dibuja elipse de centro (x0,y0) y radios a y b
     # Por defecto método no destructivo, con valor=1 y sin relleno
