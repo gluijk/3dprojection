@@ -44,7 +44,7 @@ DrawEllip = function(img, x0, y0, a, b, inc=TRUE, val=1, fill=FALSE, thick=1) {
         indices=which( ((row(img)-x0)/a)^2 + ((col(img)-y0)/b)^2 < 1 )
     } else {
         indices=which( ((row(img)-x0)/(a+thick/2))^2 + ((col(img)-y0)/(b+thick/2))^2 <  1 &
-                           ((row(img)-x0)/(a-thick/2))^2 + ((col(img)-y0)/(b-thick/2))^2 >= 1 )
+                       ((row(img)-x0)/(a-thick/2))^2 + ((col(img)-y0)/(b-thick/2))^2 >= 1 )
     }
     if (inc) img[indices]=img[indices]+val
     else img[indices]=val
@@ -125,7 +125,7 @@ create.cube=function(x=0, y=0, z=0, Nx=3, Ny=3, Nz=3, Rx=1, Ry=1, Rz=1) {  # cre
     return(cube)
 }
 
-draw.cube=function(img, x, y, z, R, f, zoom=50, val) {
+draw.ball=function(img, x, y, z, R, f, zoom=50, val) {
     factor=f/z
     xp=x*factor*zoom+ncol(img)/2
     yp=y*factor*zoom+nrow(img)/2
@@ -152,13 +152,15 @@ lapply(v, translate, dy=10)
 lapply(v, rotateZ, theta=pi/2)
 
 
-# 3D SPHERES ANIMATION
+# 3D BALLS ANIMATION
 N=360  # number of frames
+MIN=5.6178161304326  # closest ball obtained trough a pre-simulation
+MAX=14.7797206308053  # farthest ball obtained trough a pre-simulation
 for (t in 0:(N-1)) {
-    theta=2*pi*t/N
-
-    SIZE=3  # number of spheres per side
+    SIZE=3  # number of balls per axis
     cube=create.cube(Nx=SIZE+2, Ny=SIZE+1, Nz=SIZE)  # (0,0,0) centred cube
+    
+    theta=2*pi*t/N
     cube=lapply(cube, rotateY, theta=theta)
     cube=lapply(cube, rotateZ, theta=theta)
     cube=lapply(cube, translate, dz=10)
@@ -170,17 +172,18 @@ for (t in 0:(N-1)) {
         dist[i]=(cube[[i]][1]^2+cube[[i]][2]^2+cube[[i]][3]^2)^0.5
     }
     pos=order(dist, decreasing=TRUE)
-    
-    MIN=min(dist)
-    MAX=max(dist)
+
+    # MIN=min(dist)
+    # MAX=max(dist)
     for (i in 1:NBALLS) {
-        img=draw.cube(img,
+        img=draw.ball(img,
                       x=cube[[pos[i]]][1],
                       y=cube[[pos[i]]][2],
                       z=cube[[pos[i]]][3],
                       R=0.8, f=5, zoom=100,
-                      val=(0.9-0)/(MAX-MIN)*(dist[pos[i]]-MIN))
+                      val=(0.99-0)/(MAX-MIN)*(dist[pos[i]]-MIN))
     }
     
     SaveBitmap(img, paste0("img", ifelse(t<10, "00", ifelse(t<100, "0", "")), t))
 }
+
