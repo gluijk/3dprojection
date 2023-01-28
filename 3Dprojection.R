@@ -143,8 +143,7 @@ MAX=14.7797206308053  # precalculated farthest ball
 for (t in 0:(N-1)) {
     theta=2*pi*t/N
     
-    cube=centred.cube
-    cube=lapply(cube, rotateY, theta=theta)
+    cube=lapply(centred.cube, rotateY, theta=theta)
     cube=lapply(cube, rotateZ, theta=theta)
     cube=lapply(cube, translate, dz=10)
 
