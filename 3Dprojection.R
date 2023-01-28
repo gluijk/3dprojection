@@ -102,10 +102,10 @@ create.cube=function(x=0, y=0, z=0, Nx=3, Ny=3, Nz=3, Rx=1, Ry=1, Rz=1) {  # cre
 }
 
 draw.ball=function(img, x, y, z, R, f, zoom=50, val) {
-    factor=f/z
-    xp=x*factor*zoom+ncol(img)/2
-    yp=y*factor*zoom+nrow(img)/2
-    Rp=R*factor*zoom
+    factor=f/z*zoom
+    xp=x*factor+ncol(img)/2
+    yp=y*factor+nrow(img)/2
+    Rp=R*factor
     
     img=DrawCircle(img, xp, yp, Rp, inc=FALSE, val=val, fill=TRUE)
     # img=DrawCircle(img, xp, yp, Rp, val=0.8, fill=FALSE)
