@@ -165,6 +165,5 @@ for (t in 0:(N-1)) {
                       R=0.8, f=5, zoom=100,
                       val=(0.99-0)/(MAX-MIN)*(dist[pos[i]]-MIN))
     }
-    
     SaveBitmap(img, paste0("img", ifelse(t<10, "00", ifelse(t<100, "0", "")), t))
 }
