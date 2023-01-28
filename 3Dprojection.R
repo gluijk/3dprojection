@@ -147,8 +147,7 @@ for (t in 0:(N-1)) {
     cube=lapply(cube, rotateY, theta=theta)
     cube=lapply(cube, rotateZ, theta=theta)
     cube=lapply(cube, translate, dz=10)
-    img=NewBitmap(IMAGESIZE, IMAGESIZE, val=1)
-    
+
     NBALLS=length(cube)
     dist=array(0,NBALLS)
     for (i in 1:NBALLS) {
@@ -158,6 +157,7 @@ for (t in 0:(N-1)) {
 
     # MIN=min(dist)
     # MAX=max(dist)
+    img=NewBitmap(IMAGESIZE, IMAGESIZE, val=1)
     for (i in 1:NBALLS) {
         img=draw.ball(img,
                       x=cube[[pos[i]]][1],
