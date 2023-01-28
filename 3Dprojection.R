@@ -133,17 +133,21 @@ lapply(v, rotateZ, theta=pi/2)
 # 3D BALLS ANIMATION
 
 N=360  # number of frames
-MIN=5.6178161304326  # closest ball obtained trough a pre-simulation
-MAX=14.7797206308053  # farthest ball obtained trough a pre-simulation
+IMAGESIZE=800  # animation dimensions in pixels
+SIZE=3  # number of balls per axis
+
+centred.cube=create.cube(Nx=SIZE+2, Ny=SIZE+1, Nz=SIZE)  # (0,0,0) centred cube
+MIN=5.6178161304326  # precalculated closest ball
+MAX=14.7797206308053  # precalculated farthest ball
+
 for (t in 0:(N-1)) {
-    SIZE=3  # number of balls per axis
-    cube=create.cube(Nx=SIZE+2, Ny=SIZE+1, Nz=SIZE)  # (0,0,0) centred cube
-    
     theta=2*pi*t/N
+    
+    cube=centred.cube
     cube=lapply(cube, rotateY, theta=theta)
     cube=lapply(cube, rotateZ, theta=theta)
     cube=lapply(cube, translate, dz=10)
-    img=NewBitmap(800, 800, val=1)
+    img=NewBitmap(IMAGESIZE, IMAGESIZE, val=1)
     
     NBALLS=length(cube)
     dist=array(0,NBALLS)
