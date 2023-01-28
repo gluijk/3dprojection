@@ -10,31 +10,6 @@ NewBitmap = function(dimx, dimy, val=0) {
     return(array(val,c(dimx,dimy)))
 }
 
-# Por Carlos Gil Bellosta
-indices.drawline = function(x0, y0, x1, y1) {
-    x0=round(x0)
-    x1=round(x1)
-    y0=round(y0)
-    y1=round(y1)
-    
-    if (y0 == y1) return(cbind(x0:x1, y0)) # Recta de m=0 o un punto
-    if (abs(x1 - x0) >= abs(y1 - y0)) { # Recta de 0 < |m| <= 1
-        m = (y1 - y0) / (x1 - x0)
-        cbind(x0:x1, round(y0 + m * ((x0:x1) - x0)))
-    } else indices.drawline(y0, x0, y1, x1)[, 2:1]  # Recta de |m| > 1
-    # Llamada traspuesta recursiva y traspuesta
-}
-
-DrawLine = function(img, x0, y0, x1, y1, inc=TRUE, val=1) {
-    # Dibuja recta desde (x0,y0)-(x1,y1)
-    # Por defecto método no destructivo y con valor=1
-    indices=indices.drawline(x0, y0, x1, y1)
-    if (inc) img[indices]=img[indices]+val
-    else img[indices]=val
-    
-    return(img)
-}
-
 DrawEllip = function(img, x0, y0, a, b, inc=TRUE, val=1, fill=FALSE, thick=1) {
     # Dibuja elipse de centro (x0,y0) y radios a y b
     # Por defecto método no destructivo, con valor=1 y sin relleno
@@ -74,6 +49,7 @@ SaveBitmap = function(img, name, trunc=TRUE, gamma=1) {
 
 
 # BASIC 3D FUNCTIONS
+
 translate=function(v, dx=0, dy=0, dz=0) {  # translation
     Tr=c(dx, dy, dz)
     v + Tr
@@ -137,6 +113,7 @@ draw.ball=function(img, x, y, z, R, f, zoom=50, val) {
 }
 
 
+
 # EXAMPLES
 
 # single point
@@ -152,7 +129,9 @@ lapply(v, translate, dy=10)
 lapply(v, rotateZ, theta=pi/2)
 
 
+
 # 3D BALLS ANIMATION
+
 N=360  # number of frames
 MIN=5.6178161304326  # closest ball obtained trough a pre-simulation
 MAX=14.7797206308053  # farthest ball obtained trough a pre-simulation
@@ -186,4 +165,3 @@ for (t in 0:(N-1)) {
     
     SaveBitmap(img, paste0("img", ifelse(t<10, "00", ifelse(t<100, "0", "")), t))
 }
-
