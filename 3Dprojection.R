@@ -3,7 +3,7 @@
 # https://www.overfitting.net/2023/01/proyeccion-lineal-de-escenas-3d-sobre.html
 
 
-# LIBRERÕA GR¡FICA BITMAP
+# LIBRER√çA GR√ÅFICA BITMAP
 
 NewBitmap = function(dimx, dimy, val=0) {
     # Crea bitmap de dimensiones dimx y dimy
@@ -12,9 +12,9 @@ NewBitmap = function(dimx, dimy, val=0) {
 
 DrawEllip = function(img, x0, y0, a, b, inc=TRUE, val=1, fill=FALSE, thick=1) {
     # Dibuja elipse de centro (x0,y0) y radios a y b
-    # Por defecto mÈtodo no destructivo, con valor=1 y sin relleno
+    # Por defecto m√©todo no destructivo, con valor=1 y sin relleno
     # Puede elegirse el grosor si no se rellena
-    # AquÌ no redondeamos para tener m·s precisiÛn en la divisiÛn
+    # Aqu√≠ no redondeamos para tener m√°s precisi√≥n en la divisi√≥n
     if (fill) {
         indices=which( ((row(img)-x0)/a)^2 + ((col(img)-y0)/b)^2 < 1 )
     } else {
@@ -28,8 +28,8 @@ DrawEllip = function(img, x0, y0, a, b, inc=TRUE, val=1, fill=FALSE, thick=1) {
 }
 
 DrawCircle = function(img, x0, y0, r, inc=TRUE, val=1, fill=FALSE, thick=1) {
-    # Dibuja cÌrculo de centro (x0,y0) y radio r
-    # Por defecto mÈtodo no destructivo, con valor=1 y sin relleno
+    # Dibuja c√≠rculo de centro (x0,y0) y radio r
+    # Por defecto m√©todo no destructivo, con valor=1 y sin relleno
     # Puede elegirse el grosor si no se rellena
     img=DrawEllip(img, x0, y0, r, r, inc, val, fill, thick)
     
@@ -50,17 +50,17 @@ SaveBitmap = function(img, name, trunc=TRUE, gamma=1) {
 
 # BASIC 3D FUNCTIONS
 
-translate=function(v, dx=0, dy=0, dz=0) {  # translation
+translate = function(v, dx=0, dy=0, dz=0) {  # translation
     Tr=c(dx, dy, dz)
     v + Tr
 }
 
-scale=function(v, sx=1, sy=1, sz=1) {  # scale
+scale = function(v, sx=1, sy=1, sz=1) {  # scale
     Sc=c(sx, sy, sz)
     v * Sc
 }
 
-rotateX=function(v, theta=0) {  # rotation around X axis
+rotateX = function(v, theta=0) {  # rotation around X axis
     Ro=matrix(c(1, 0,           0,
                 0, cos(theta), -sin(theta),
                 0, sin(theta),  cos(theta)),
@@ -68,7 +68,7 @@ rotateX=function(v, theta=0) {  # rotation around X axis
     Ro %*% v  # matrix multiplication
 }
 
-rotateY=function(v, theta=0) {  # rotation around Y axis
+rotateY = function(v, theta=0) {  # rotation around Y axis
     Ro=matrix(c(cos(theta), 0, sin(theta),
                 0,          1, 0,
                -sin(theta), 0, cos(theta)),
@@ -76,7 +76,7 @@ rotateY=function(v, theta=0) {  # rotation around Y axis
     Ro %*% v  # matrix multiplication
 }
 
-rotateZ=function(v, theta=0) {  # rotation around Z axis
+rotateZ = function(v, theta=0) {  # rotation around Z axis
     Ro=matrix(c(cos(theta), -sin(theta), 0,
                 sin(theta),  cos(theta), 0,
                 0,           0,          1),
@@ -84,7 +84,7 @@ rotateZ=function(v, theta=0) {  # rotation around Z axis
     Ro %*% v  # matrix multiplication
 }
 
-create.cube=function(x=0, y=0, z=0, Nx=3, Ny=3, Nz=3, Rx=1, Ry=1, Rz=1) {  # create list of cube points
+create.cube = function(x=0, y=0, z=0, Nx=3, Ny=3, Nz=3, Rx=1, Ry=1, Rz=1) {  # create list of cube points
     cube=list()
     n=1
     for (i in 1:Nx) {
@@ -101,7 +101,7 @@ create.cube=function(x=0, y=0, z=0, Nx=3, Ny=3, Nz=3, Rx=1, Ry=1, Rz=1) {  # cre
     return(cube)
 }
 
-draw.ball=function(img, x, y, z, R, f, zoom=50, val) {
+draw.ball = function(img, x, y, z, R, f, zoom=50, val) {
     factor=f/z*zoom
     xp=x*factor+ncol(img)/2
     yp=y*factor+nrow(img)/2
