@@ -114,7 +114,7 @@ draw.ball = function(img, x, y, z, R, f, zoom=50, val=1) {
 
 
 
-# 'MYSTERY BALLS' ANIMATION
+# 'MYSTERY BALLS' 3D ANIMATION
 
 N=262  # 65  # 524  # 66  # 131  # number of frames
 IMAGESIZE=800  # animation dimensions in pixels
