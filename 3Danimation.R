@@ -107,37 +107,38 @@ draw.ball = function(img, x, y, z, R, f, zoom=50, val=1) {
     yp=y*factor+nrow(img)/2
     Rp=R*factor
     
-    img=DrawCircle(img, xp, yp, Rp, inc=FALSE, val=0, fill=TRUE)
-    img=DrawCircle(img, xp, yp, Rp, inc=FALSE, fill=FALSE)
+    img=DrawCircle(img, xp, yp, Rp, inc=FALSE, fill=TRUE, val=0)
+    img=DrawCircle(img, xp, yp, Rp, inc=FALSE, fill=FALSE, val=val)
     return(img)
 }
 
 
 
-# 3D BALLS ANIMATION
+# 'MYSTERY BALLS' ANIMATION
 
-N=262  # 131  # 65  # 524  # 66  # 131  # number of frames
+N=262  # 65  # 524  # 66  # 131  # number of frames
 IMAGESIZE=800  # animation dimensions in pixels
 SIZE=3  # number of balls per axis
 
 centred.cube=create.cube(Nx=SIZE, Ny=SIZE, Nz=SIZE)  # (0,0,0) centred cube
 
-# INITFRAME=0  # expansion
-# INITFRAME=131  # rotate Y
-# INITFRAME=262  # rotate X
-# INITFRAME=393  # rotate Z
-# INITFRAME=524  # pause 1
-# INITFRAME=590  # rotate Y+X
-# INITFRAME=1114  # pause 2
-INITFRAME=1179  # implosion
+# INITFRAME=0  # expanse (N=131)
+# INITFRAME=131  # rotate Y (N=131)
+# INITFRAME=262  # rotate X (N=131)
+# INITFRAME=393  # rotate Z (N=131)
+# INITFRAME=524  # pause 1 (N=66)
+# INITFRAME=590  # rotate Y+X (N=524)
+# INITFRAME=1114  # pause 2 (N=65)
+INITFRAME=1179  # implosion (N=262)
 for (t in 0:(N-1)) {
     print(paste0(t+1, "/", N))
     theta=0  #2*pi*t/N  # pi/2*t/N
     
-    cube=lapply(centred.cube, rotateY, theta=theta)
+    cube=centred.cube
+    # cube=lapply(cube, rotateY, theta=theta)
     # cube=lapply(cube, rotateX, theta=theta)
-    # cube=lapply(centred.cube, rotateZ, theta=theta)
-    cube=lapply(cube, translate, dz=10)
+    # cube=lapply(cube, rotateZ, theta=theta)
+    cube=lapply(cube, translate, dz=10+((N-t)/N)^2*200)
 
     NBALLS=length(cube)
     dist=array(0,NBALLS)
@@ -152,6 +153,7 @@ for (t in 0:(N-1)) {
                       x=cube[[pos[i]]][1],
                       y=cube[[pos[i]]][2],
                       z=cube[[pos[i]]][3],
+                      # val=(t+1)/N,
                       # R=0.8, f=5, zoom=100)
                       # R=0.8*t/N, f=5, zoom=100)
                       R=0.8*(N-1-t)/N, f=5, zoom=100)
@@ -165,7 +167,8 @@ for (t in 0:(N-1)) {
                )
 }
 
-# Create final video:
+# Create final MP4 video:
+# (Music: Dark Mystery Trailer (Taking Our Time) by AlexGrohl)
 # ffmpeg -framerate 30 -i img%4d.png -i darkmystery.wav -c:v libx264 -crf 15
-# -pix_fmt yuv420p cubeanim.mp4
-# Music: Dark Mystery Trailer (Taking Our Time) by AlexGrohl
+# -pix_fmt yuv420p 3danimation.mp4
+
