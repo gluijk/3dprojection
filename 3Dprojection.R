@@ -3,7 +3,7 @@
 # https://www.overfitting.net/2023/01/proyeccion-lineal-de-escenas-3d-sobre.html
 
 
-# LIBRER√çA GR√ÅFICA BITMAP
+# LIBRERÕA GR¡FICA BITMAP
 
 NewBitmap = function(dimx, dimy, val=0) {
     # Crea bitmap de dimensiones dimx y dimy
@@ -12,9 +12,9 @@ NewBitmap = function(dimx, dimy, val=0) {
 
 DrawEllip = function(img, x0, y0, a, b, inc=TRUE, val=1, fill=FALSE, thick=1) {
     # Dibuja elipse de centro (x0,y0) y radios a y b
-    # Por defecto m√©todo no destructivo, con valor=1 y sin relleno
+    # Por defecto mÈtodo no destructivo, con valor=1 y sin relleno
     # Puede elegirse el grosor si no se rellena
-    # Aqu√≠ no redondeamos para tener m√°s precisi√≥n en la divisi√≥n
+    # AquÌ no redondeamos para tener m·s precisiÛn en la divisiÛn
     if (fill) {
         indices=which( ((row(img)-x0)/a)^2 + ((col(img)-y0)/b)^2 < 1 )
     } else {
@@ -28,8 +28,8 @@ DrawEllip = function(img, x0, y0, a, b, inc=TRUE, val=1, fill=FALSE, thick=1) {
 }
 
 DrawCircle = function(img, x0, y0, r, inc=TRUE, val=1, fill=FALSE, thick=1) {
-    # Dibuja c√≠rculo de centro (x0,y0) y radio r
-    # Por defecto m√©todo no destructivo, con valor=1 y sin relleno
+    # Dibuja cÌrculo de centro (x0,y0) y radio r
+    # Por defecto mÈtodo no destructivo, con valor=1 y sin relleno
     # Puede elegirse el grosor si no se rellena
     img=DrawEllip(img, x0, y0, r, r, inc, val, fill, thick)
     
@@ -107,8 +107,8 @@ draw.ball = function(img, x, y, z, R, f, zoom=50, val) {
     yp=y*factor+nrow(img)/2
     Rp=R*factor
     
-    img=DrawCircle(img, xp, yp, Rp, inc=FALSE, val=val, fill=TRUE)
-    # img=DrawCircle(img, xp, yp, Rp, val=0.8, fill=FALSE)
+    img=DrawCircle(img, xp, yp, Rp, inc=FALSE, fill=TRUE, val=val)
+    # img=DrawCircle(img, xp, yp, Rp, fill=FALSE, val=1)
     return(img)
 }
 
