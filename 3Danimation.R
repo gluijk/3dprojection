@@ -122,6 +122,7 @@ SIZE=3  # number of balls per axis
 
 centred.cube=create.cube(Nx=SIZE, Ny=SIZE, Nz=SIZE)  # (0,0,0) centred cube
 
+# Total frames: 1441 at 30fps
 # INITFRAME=0  # expanse (N=131)
 # INITFRAME=131  # rotate Y (N=131)
 # INITFRAME=262  # rotate X (N=131)
