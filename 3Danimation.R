@@ -103,6 +103,7 @@ create.cube = function(x=0, y=0, z=0, Nx=3, Ny=3, Nz=3, Rx=1, Ry=1, Rz=1) {  # c
 
 draw.ball = function(img, x, y, z, R, f, zoom=50, val=1) {
     factor=f/z*zoom
+    # factor=f/(x*x+y*y+z*z)^0.5*zoom  # alternative projection (curvilinear)
     xp=x*factor+ncol(img)/2
     yp=y*factor+nrow(img)/2
     Rp=R*factor
